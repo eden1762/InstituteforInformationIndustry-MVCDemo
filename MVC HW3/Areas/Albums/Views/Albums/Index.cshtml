@@ -1,0 +1,105 @@
+﻿
+@model IEnumerable<MVC_HW3.Models.tAlbum>
+@{
+    ViewBag.Title = "相簿";
+}
+@section styles{
+    <style>
+        .al {
+            position: relative;
+        }
+
+            .al .close {
+                position: absolute;
+                top: 2px;
+                right: 2px;
+                z-index: 100;
+                width: 50px;
+            }
+
+        .close:hover {
+            opacity: 1.0;
+            filter: alpha(opacity=100); /* 针对 IE8 以及更早的版本 */
+
+        }
+        .overtext{
+       
+            width:100%;
+            /*text-overflow : ellipsis;*/
+        }
+        div.overtext > h4 {
+            white-space: nowrap;
+            width: 100%;
+            overflow: hidden;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+        }
+        
+    </style>
+
+}
+
+<h2>相簿</h2>
+<div id="createbutton">
+    <a href="@Url.Action("tAlbumCreate","Bulletin",new{@area= "Bulletin"})">
+        <input type="button" class="btn btn-primary" value="建立新相簿" />
+    </a>
+</div>
+<div >
+    @foreach (var albums in Model)
+    {
+
+        <div class="col-try2">
+            <div class="albox">
+                <div class="al">
+                    <a href="@Url.Action("tAlbumDelete","Bulletin",new {area="Bulletin",ID=albums.fAl_ID})">
+                        <img src="~/Images/close.png" class="close" id="deletebutton" />
+                    </a>
+                    <a href="@Url.Action("Photo","Albums",new {area="Albums",ID=albums.fAl_ID})">
+                        <div class="divcss5">
+
+                            @if (albums.tPhoto.Any())
+                            {
+                                <img src="@Url.Action("GetImage", "Albums", new { area = "Albums", id = albums.tPhoto.First().fPh_ID })" />
+
+                            }
+                            else
+                            {
+                                <img src="#" />
+                            }
+
+
+                        </div>
+
+                    </a>
+                </div>
+
+
+                <div class="padd5">
+                    <h4>[第 @albums.tTravelCase.fTC_LorD 期] </h4>
+                    <div class="overtext"><h4>@albums.tTravelCase.fTC_Title</h4></div>
+                   
+                </div>
+
+            </div>
+
+        </div>
+    }
+</div>
+
+@section scripts{
+<script>
+            $(document).ready(function () {
+                if ($.cookie('Manergers') == null) {
+                    $("#createbutton").hide();
+                    $(".close").each(function () {
+                        $(this).hide();});
+                }
+                else {
+                    $("#createbutton").show();
+                    $("#deletebutton").show();
+                }
+            });
+</script>   
+
+}

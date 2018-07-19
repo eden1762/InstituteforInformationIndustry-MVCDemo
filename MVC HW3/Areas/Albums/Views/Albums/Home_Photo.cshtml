@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MVC_HW3.Models.tPhoto>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <a href="@Url.Action("Photo","Albums",new {area="Albums",ID=Model.Skip(0).First().fAl_ID,pID=Model.Skip(0).First().fPh_ID})">
+                    <div class="divcss6">
+                        <img src="@Url.Action("GetImage","Albums",new {area="Albums",id=Model.Skip(0).First().fPh_ID})">
+                    </div>
+
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <a href="@Url.Action("Photo","Albums",new {area="Albums",ID=Model.Skip(1).First().fAl_ID,pID=Model.Skip(1).First().fPh_ID})">
+                    <div class="divcss6">
+                        <img src="@Url.Action("GetImage","Albums",new {area="Albums",id=Model.Skip(1).First().fPh_ID})">
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <a href="@Url.Action("Photo","Albums",new {area="Albums",ID=Model.Skip(2).First().fAl_ID,pID=Model.Skip(2).First().fPh_ID})">
+                    <div class="divcss4">
+                        <img src="@Url.Action("GetImage","Albums",new {area="Albums",id=Model.Skip(2).First().fPh_ID})">
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <a href="@Url.Action("Photo","Albums",new {area="Albums",ID=Model.Skip(3).First().fAl_ID,pID=Model.Skip(3).First().fPh_ID})">
+                    <div class="divcss4">
+                        <img src="@Url.Action("GetImage","Albums",new {area="Albums",id=Model.Skip(3).First().fPh_ID})">
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <a href="@Url.Action("Photo","Albums",new {area="Albums",ID=Model.Skip(4).First().fAl_ID,pID=Model.Skip(4).First().fPh_ID})">
+                    <div class="divcss4">
+                        <img src="@Url.Action("GetImage","Albums",new {area="Albums",id=Model.Skip(4).First().fPh_ID})">
+                    </div>
+                </a>
+            </div>
+        </div>
+  
+
+@section scripts2{
+
+
+}
