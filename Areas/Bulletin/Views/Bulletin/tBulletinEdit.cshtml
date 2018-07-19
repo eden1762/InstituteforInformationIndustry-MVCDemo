@@ -1,0 +1,99 @@
+﻿@model MVC_HW3.Models.tBulletin
+
+@{
+    ViewBag.Title = "Edit";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>修改視窗</h2>
+<style>
+    .input {
+        width: 100%;
+    }
+</style>
+@section styles{
+}
+@section scripts{
+    <script>
+        //$(document).ready(function () { $("#input").cleditor(); });
+        CKEDITOR.replace('input', {
+            extraPlugins: '',
+            height: 500,
+
+            // Upload images to a CKFinder connector (note that the response type is set to JSON).
+            //uploadUrl: '@Url.Action("UpLoadToDB")',
+            filebrowserImageBrowseUrl: '/CKFinderScripts/ckfinder.html?type=Images',
+            filebrowserImageUploadUrl: '@Url.Action("UpLoadToDB", "Restaurant")' + '?command=QuickUpload&type=Images'
+        })
+        $('#Demo').click(function () {
+            $('#DropDownListfBC_ID')[0].selectedIndex = 1;
+            $('#EditorForfBu_Date').val('2008/08/13');
+            $('#EditorForfBu_Title').val('太魯閣、花蓮海線之旅的相簿出爐了!與大家一同分享喜悅!!');
+            CKEDITOR.instances.input.setData('<p>感謝各位同事的熱情參與!</p> <h1><big><strong>我們的相簿出爐了!!</strong></big></h1> <p>並感謝XX旅遊的協助與XX公司的的熱情參與!</p> <p><img alt="" src="https://media-cdn.tripadvisor.com/media/photo-s/0d/17/c1/74/photo4jpg.jpg" style="height:413px; width:550px" /></p> ');
+
+
+        });
+    </script>
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>公告修改</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.fBu_ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fBu_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fBu_Date, new { htmlAttributes = new { @class = "form-control", id = "EditorForfBu_Date" } })
+                @Html.ValidationMessageFor(model => model.fBu_Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fBC_ID, "公告欄類別", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("fBC_ID", null, htmlAttributes: new { @class = "form-control", id = "DropDownListfBC_ID" })
+                @Html.ValidationMessageFor(model => model.fBC_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fBu_Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fBu_Title, new { htmlAttributes = new { @class = "form-control", id = "EditorForfBu_Title" } })
+                @Html.ValidationMessageFor(model => model.fBu_Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fBu_Content, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.fBu_Content, new { id = "input" })
+                @Html.ValidationMessageFor(model => model.fBu_Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Demo" id="Demo" class="btn btn-primary" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" text="修改" value="儲存變更" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("回首頁", "Bulletin", "Home", new { area = "" }, new { })
+</div>
+
+
+
+

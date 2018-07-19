@@ -1,0 +1,8 @@
+﻿@model IEnumerable< MVC_HW3.Models.tForumMessage>
+
+@foreach(var mess in Model){
+    <div class="padd10">
+        <h4 class="text-primary">@mess.tEmployee.fEp_Nickname</h4><p>@mess.fFM_Content</p>
+    </div>
+
+}

@@ -1,0 +1,59 @@
+﻿@model MVC_HW3.Models.tAlbum
+
+@{
+    ViewBag.Title = "tAlbumCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>創建視窗</h2>
+<script>
+    $('#Demo').click(function () {
+        $('#DropDownListfTC_ID')[0].selectedIndex = 2;
+    })
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>相簿內容</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.fTC_ID, "旅遊提案類別", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("fTC_ID", null, htmlAttributes: new { @class = "form-control" ,id= "DropDownListfTC_ID" })
+                @Html.ValidationMessageFor(model => model.fTC_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fAl_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.fAl_Date, new { htmlAttributes = new { @class = "form-control" } })
+                @DateTime.Now.ToString()
+                @Html.ValidationMessageFor(model => model.fAl_Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Demo" id="Demo" class="btn btn-primary" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="建立" class="btn btn-primary" id="submitbutton"/>
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("回首頁", "Index", "Home", new { area = "" }, new { })
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
